@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import './header.css';
 import { Link } from 'react-router-dom';
-import UserDropdown from '../user-dropdown/user-dropdown';
+import UserDropdown from '../../user/user-dropdown/user-dropdown';
+import SignButtons from '../signButtons/signButtons';
 
 interface Props {
   token: string | null
@@ -27,16 +28,17 @@ export default class Header extends Component<Props> {
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
+                <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                   <Link className="nav-link" to='/'><i className="fas fa-lg fa-rocket m-2 text-primary"></i>Home</Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                   <Link className="nav-link" to='/link_editor'><i className="fas fa-lg fa-pencil-alt m-2 text-primary"></i>Create Link</Link>
                 </li>
               </ul>
-              <UserDropdown username='rbsrafa' profileImage={''}/>
+              {/* <UserDropdown username='rbsrafa' profileImage={''}/> */}
+              <SignButtons />
             </div>
-  
+
           </nav>
         </nav>
       </React.Fragment>

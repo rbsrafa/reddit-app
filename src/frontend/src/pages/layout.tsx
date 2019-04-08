@@ -7,7 +7,7 @@ import { CreateLinkPage } from './link-create/link-create';
 import { UserProfilePage } from './user-profile/user-profile';
 import { SigninPage } from './signin/signin';
 import { SignupPage } from './signup/signup';
-import Header from '../components/header/header';
+import Header from '../components/navbar/header/header';
 
 export default class Layout extends Component {
 
@@ -17,6 +17,7 @@ export default class Layout extends Component {
         <Header token={null}/>
         <Switch>
           <React.Fragment>
+            <br></br>
             <Route exact path='/' component={HomePage}/>
             <Route exact path='/link/:link_id' component={LinkViewPage}/>
             <Route exact path='/link_editor/:link_id' component={LinkEditorPage}/>

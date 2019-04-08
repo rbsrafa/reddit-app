@@ -1,0 +1,27 @@
+import { User } from './../interfaces/User';
+
+export async function signUpService(user: User){
+  return await fetch(
+    '/api/v1/users/',
+    {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user)
+    }
+  );
+}
+
+export async function signInService(email: string, password: string){
+  return await fetch(
+    '/api/v1/auth/login',
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({email, password})
+    }
+  );
+}
