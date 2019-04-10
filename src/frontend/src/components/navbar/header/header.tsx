@@ -37,7 +37,7 @@ class _Header extends Component<Props, State> {
     return (
       <React.Fragment>
         <nav>
-          <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+          <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
 
             <Link className="navbar-brand" to={'/'}><i className="fab fa-lg fa-reddit-alien m-2 alien"></i>reddit</Link>
 
@@ -48,10 +48,10 @@ class _Header extends Component<Props, State> {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                  <Link className="nav-link" to='/'><i className="fas fa-lg fa-rocket m-2 text-primary"></i>Home</Link>
+                  <Link className="nav-link" to='/'><i className="fas fa-rocket m-2 text-primary"></i>Home</Link>
                 </li>
                 <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                  <Link className="nav-link" to='/link_editor'><i className="fas fa-lg fa-pencil-alt m-2 text-primary"></i>Create Link</Link>
+                  <Link className="nav-link" to='/link_editor'><i className="fas fa-pencil-alt m-2 text-primary"></i>Create Link</Link>
                 </li>
               </ul>
 

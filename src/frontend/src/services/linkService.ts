@@ -1,6 +1,14 @@
 
 export async function getLinkById(id: number){
-
+  return await fetch(
+    `/api/v1/links/${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  );
 }
 
 export async function getLinks() {
@@ -10,6 +18,18 @@ export async function getLinks() {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
+      }
+    }
+  );
+}
+
+export async function getLinkForViewPage(id: number){
+  return await fetch(
+    `/api/v1/links/${id}/viewPage`,
+    {
+      method: 'GET',
+      headers: {
+        "Content-Type":"application/json"
       }
     }
   );

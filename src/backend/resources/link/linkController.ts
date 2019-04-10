@@ -55,6 +55,18 @@ export class LinkController extends BaseHttpController{
     }
   }
 
+  @httpGet('/:id/viewPage')
+  public async getLinkForView(
+    @requestParam('id') id: number
+  ){
+    try{
+      const link = await this._linkService.getLinkForLinkViewPage(id);
+      return this.json(link, 200);      
+    }catch(error){
+      return this.json({error: error}, 500);
+    }
+  }
+
   @httpPost('/', authMiddleware)
   public async createLink(
     @requestBody() body: any,

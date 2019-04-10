@@ -18,7 +18,7 @@ export class CommentService {
 
   public async getCommentById(id: number) {
     const comment = await this._commentRepository.findOne(
-      id, { relations: ['user', 'link'] }
+      id, { relations: ['user'] }
     );
     if (!comment) return false;
     return comment;

@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import LinkEntry from '../../components/link/link-entry/linkEntry';
-import { Link } from '../../interfaces/Link';
+import LinkEntry from '../../components/link/linkEntry/linkEntry';
+import { ILinkEntry } from '../../interfaces/ILinkEntry';
 import { getLinks } from '../../services/linkService';
+import ListView from '../../components/link/listView/listView';
 
 interface Props {
 
 }
 
 interface State {
-  links: Link[] | null;
+  links: ILinkEntry[] | null;
 }
 
 export class HomePage extends Component<Props, State> {
@@ -46,9 +47,11 @@ export class HomePage extends Component<Props, State> {
 
   render() {
     if (this.state.links) {
-      return this.state.links.map((l, i) => {
-        return <LinkEntry link={this.state.links![i]} />
-      });
+      return (
+        <div className="offset-sm-1 col-sm-10 offset-md-2 col-md-8 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+          <ListView items={this.state.links} />
+        </div>
+      );
     } else {
       return <div>loading...</div>
     }

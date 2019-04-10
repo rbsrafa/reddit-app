@@ -1,11 +1,11 @@
 import { User } from './User';
 
-export interface Link {
+export interface ILinkEntry {
   id: number;
   title: string;
   url: string;
   commentCount?: number;
-  date?: Date;
+  date?: string;
   username?: string;
   userId?: number;
   score?: number;

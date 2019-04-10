@@ -7,6 +7,7 @@
     "test": "nyc --clean --all --require ts-node/register --require reflect-metadata/Reflect --extension .ts -- mocha --timeout 5000 **/*.test.ts",
     "coverage": "nyc report --reporter=html --clean --all --require ts-node/register --require reflect-metadata/Reflect --extension .ts -- mocha --timeout 5000 **/*.test.ts",
     "client": "cd ./src/frontend && npm start",
+    "server":"nodemon",
     "start": "concurrently --kill-others \"npm run client\"  \"nodemon\""
   },
   "keywords": [

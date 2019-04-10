@@ -2,6 +2,8 @@ import { TYPES } from './../../constants/types';
 import { Link } from './Link';
 import { inject } from "inversify";
 import { Repository } from 'typeorm';
+import { Comment } from '../comment/Comment';
+import { User } from '../user/User';
 
 /**
  * LinkService Class
@@ -13,7 +15,8 @@ export class LinkService {
    * @param _linkRepository 
    */
   public constructor(
-    @inject(TYPES.LinkRepository) private _linkRepository: Repository<Link>
+    @inject(TYPES.LinkRepository) private _linkRepository: Repository<Link>,
+    @inject(TYPES.UserRepository) private _userRepository: Repository<User>
   ) { }
 
   /**
@@ -21,11 +24,16 @@ export class LinkService {
    */
   public async getAllLinks() {
     // Get all links
-    const links = await this._linkRepository.find({relations: ['comments', 'user', 'votes']});
+    const links = await this._linkRepository.find({ relations: ['comments', 'user', 'votes'] });
     // Count the links returned
     const linkCount = links.length;
     // Return links and counter
     return { links, linkCount };
+  }
+
+  public async getLinkForLinkViewPage(id: number) {
+    const linkWithComment = await this._linkRepository.findOne(id, {relations: ['votes', 'user', 'comments', 'comments.user']});
+    return linkWithComment;
   }
 
   /**

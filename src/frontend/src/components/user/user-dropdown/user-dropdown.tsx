@@ -19,7 +19,7 @@ export default class UserDropdown extends Component<Props> {
         <ul className="navbar-nav ml-auto">
           <li className="nav-item dropdown">
             <button
-              className="dropdown-toggle btn btn-outline-primary user-drop"
+              className="dropdown-toggle btn-sm btn btn-outline-primary user-drop"
               id="navbarDropdown"
               data-toggle="dropdown"
               aria-haspopup="true"

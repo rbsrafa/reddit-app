@@ -1,12 +1,12 @@
 #score{
   text-align: center !important;
-  background: #1B1A1B;
+  background: #201F20;
   padding-top: 15px;
 }
 
 #link-body{
   background-color: #201F20;
-  padding: 15px;
+  padding: 10px 15px 15px 0px;
 }
 
 #link-row{
@@ -15,5 +15,10 @@
 }
 
 #link-row:hover{
-  border: 1px solid rgb(194, 182, 182);
+  /* border: 1px solid rgb(194, 182, 182); */
+}
+
+#item-title{
+  color: white;
+  text-decoration: none;
 }

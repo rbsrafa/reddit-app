@@ -1,13 +1,13 @@
 .user-drop{
-  min-width: 210px !important;
-  max-width: 210px !important;
-  padding-left: 20px !important;
-  padding-right: 20px !important;
+  min-width: 185px !important;
+  max-width: 185px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
 }
 
 .items{
-  min-width: 210px !important;
-  max-width: 210px !important;
+  min-width: 185px !important;
+  max-width: 185px !important;
   color: rgb(236, 227, 227) !important;
 }
 

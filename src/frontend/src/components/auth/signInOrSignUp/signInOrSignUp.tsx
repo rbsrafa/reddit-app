@@ -106,7 +106,7 @@ class _SignInOrSingUp extends Component<Props, State> {
         <button
           onClick={() => this._handleSignin()}
           type="button"
-          className="btn btn-primary"
+          className="btn btn-sm btn-primary"
         >Launch
         </button>
       </React.Fragment>
@@ -174,7 +174,7 @@ class _SignInOrSingUp extends Component<Props, State> {
         <button
           onClick={() => this._handleSignup()}
           type="button"
-          className="btn btn-primary"
+          className="btn btn-sm btn-primary"
         >Start Engine
         </button>
       </React.Fragment>
