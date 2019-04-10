@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 interface Props {
   username: string;
-  profileImage: string;
+  profileImage: {id: number, url: string};
 }
 
 export default class UserDropdown extends Component<Props> {
@@ -25,6 +25,7 @@ export default class UserDropdown extends Component<Props> {
               aria-haspopup="true"
               aria-expanded="false"
             >
+              <img id='profile-image' src={this.props.profileImage.url} alt=""/>
               {this.props.username}
             </button>
             <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
@@ -32,10 +33,10 @@ export default class UserDropdown extends Component<Props> {
                 <i className="fas fa-lg fa-user-astronaut m-2 text-primary"></i>
                 <span className='m-2'>Profile</span>
               </Link>
-              <Link className="dropdown-item items" to={'/'}>
+              <a className="dropdown-item items" href='/'>
                 <i className="fas fa-lg fa-sign-out-alt m-2 text-primary"></i>
                 <span className='m-2'>Logout</span>
-              </Link>
+              </a>
             </div>
           </li>
         </ul>

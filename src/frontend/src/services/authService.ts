@@ -25,3 +25,16 @@ export async function signInService(email: string, password: string){
     }
   );
 }
+
+export async function getAuthUser(token: string) {
+  return await fetch(
+    '/api/v1/auth/user',
+    {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": token
+      }
+    }
+  );
+}

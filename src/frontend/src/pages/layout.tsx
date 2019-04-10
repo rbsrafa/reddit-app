@@ -7,14 +7,14 @@ import { CreateLinkPage } from './link-create/link-create';
 import { UserProfilePage } from './user-profile/user-profile';
 import { SigninPage } from './signin/signin';
 import { SignupPage } from './signup/signup';
-import Header from '../components/navbar/header/header';
+import { Header } from '../components/navbar/header/header';
 
 export default class Layout extends Component {
 
   render() {
     return (
       <React.Fragment>
-        <Header token={null}/>
+        <Header />
         <Switch>
           <React.Fragment>
             <br></br>

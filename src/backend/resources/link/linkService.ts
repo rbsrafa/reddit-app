@@ -21,7 +21,7 @@ export class LinkService {
    */
   public async getAllLinks() {
     // Get all links
-    const links = await this._linkRepository.find();
+    const links = await this._linkRepository.find({relations: ['comments', 'user', 'votes']});
     // Count the links returned
     const linkCount = links.length;
     // Return links and counter

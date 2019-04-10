@@ -11,7 +11,7 @@ export class CommentService {
   ) { }
 
   public async getAllComments() {
-    const comments = await this._commentRepository.find();
+    const comments = await this._commentRepository.find({relations: ['user']});
     const commentCount = comments.length;
     return { comments, commentCount };
   }

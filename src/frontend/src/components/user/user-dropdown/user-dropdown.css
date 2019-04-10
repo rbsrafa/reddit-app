@@ -1,7 +1,8 @@
 .user-drop{
   min-width: 210px !important;
-  padding-left: 52px !important;
-  padding-right: 52px !important;
+  max-width: 210px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
 
 .items{
@@ -13,4 +14,12 @@
 .items:hover{
   color: rgb(94, 93, 93) !important;
   background: rgb(214, 214, 214);
+}
+
+#profile-image{
+  width: 30px;
+  border-radius: 12px;
+  margin-right: 10px;
+  margin-left: 0px;
+  padding-left: 0px;
 }

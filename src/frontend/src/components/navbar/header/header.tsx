@@ -3,18 +3,37 @@ import './header.css';
 import { Link } from 'react-router-dom';
 import UserDropdown from '../../user/user-dropdown/user-dropdown';
 import SignButtons from '../signButtons/signButtons';
+import { withAuth } from '../../with_auth/with_auth';
+import { User } from '../../../interfaces/User';
+import { getAuthUser } from '../../../services/authService';
 
 interface Props {
   token: string | null
 }
 
-export default class Header extends Component<Props> {
+interface State {
+  user: User | null
+}
+
+class _Header extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+    this.state = {
+      user: null
+    }
+  }
+
+  async componentDidUpdate() {
+    if(!this.state.user && this.props.token) {
+      const res = await getAuthUser(this.props.token);
+      const user = await res.json();
+      this.setState({user});
+    }
   }
 
   render() {
+
     return (
       <React.Fragment>
         <nav>
@@ -35,8 +54,13 @@ export default class Header extends Component<Props> {
                   <Link className="nav-link" to='/link_editor'><i className="fas fa-lg fa-pencil-alt m-2 text-primary"></i>Create Link</Link>
                 </li>
               </ul>
-              {/* <UserDropdown username='rbsrafa' profileImage={''}/> */}
-              <SignButtons />
+
+              {this.state.user ? 
+                <UserDropdown username={this.state.user.username} profileImage={this.state.user.profileImage!}/> 
+                :
+                <SignButtons />
+              }
+
             </div>
 
           </nav>
@@ -45,3 +69,5 @@ export default class Header extends Component<Props> {
     )
   }
 }
+
+export const Header = withAuth(props => <_Header token={props.authToken} />);

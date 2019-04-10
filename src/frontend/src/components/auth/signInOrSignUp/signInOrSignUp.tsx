@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { signUpService, signInService } from '../../../services/authService';
 import { withRouter } from 'react-router';
 import { User } from '../../../interfaces/User';
+import { setAuthToken } from '../../with_auth/with_auth';
 
 interface Props {
   isSignIn: boolean;
@@ -25,8 +26,9 @@ class _SignInOrSingUp extends Component<Props, State> {
         firstName: '',
         lastName: '',
         username: '',
-        email: '',
-        password: ''
+        email: 'rbsrafa@gmail.com',
+        password: 'rbs0185$',
+        profileImage: {id: -1, url: ''}
       },
       regStatus: ''
     }
@@ -59,9 +61,11 @@ class _SignInOrSingUp extends Component<Props, State> {
   private async _handleSignin() {
     const email = this.state.user.email;
     const password = this.state.user.password;
-    const res = await signInService(email, password);
+    const res = await signInService(email, password!);
     if(res.status === 201){
-      console.log(await res.json())
+      const token = (await res.json()).token;
+      setAuthToken(token);
+      this.props.history.push('/');
     }else{
       console.log(res);
     }

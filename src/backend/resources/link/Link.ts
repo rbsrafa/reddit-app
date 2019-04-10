@@ -17,6 +17,8 @@ export class Link extends EntityAudit{
   @Column({nullable: false})
   public title!: string;
 
+  
+
   @ManyToOne(type => User, user => user.links, {onDelete: 'CASCADE'})
   public user!: User;
 
