@@ -9,16 +9,13 @@
   padding: 10px 15px 15px 0px;
 }
 
-#link-row{
+#link-row2{
   border: 1px solid rgb(88, 82, 82);
   border-radius: 6px;
-}
-
-#link-row:hover{
-  /* border: 1px solid rgb(194, 182, 182); */
 }
 
 #item-title{
   color: white;
   text-decoration: none;
+  width: 93%;
 }

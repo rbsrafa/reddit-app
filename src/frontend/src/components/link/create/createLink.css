@@ -1,0 +1,23 @@
+.dark{
+  background: #201F20;
+  border-color: rgb(75, 71, 71) !important;
+}
+
+.border{
+  border-color: rgb(75, 71, 71) !important;
+}
+
+#types{
+  background: #201F20;
+  margin-left: 0px;
+  margin-right: 0px;
+  height: 2rem;
+  text-align: center;
+  line-height: 30px;
+}
+
+.expand{
+  border-radius: 0px !important;
+  margin: 0px;
+  width: 100% !important;
+}

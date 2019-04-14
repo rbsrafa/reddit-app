@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 interface Props {
   username: string;
   profileImage: {id: number, url: string};
+  userId: number;
 }
 
 export default class UserDropdown extends Component<Props> {
@@ -29,7 +30,7 @@ export default class UserDropdown extends Component<Props> {
               {this.props.username}
             </button>
             <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-              <Link className="dropdown-item items" to='/user/user_details'>
+              <Link className="dropdown-item items" to={`user/${this.props.userId}`}>
                 <i className="fas fa-lg fa-user-astronaut m-2 text-primary"></i>
                 <span className='m-2'>Profile</span>
               </Link>

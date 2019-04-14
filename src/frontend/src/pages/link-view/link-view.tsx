@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { getLinkForViewPage } from '../../services/linkService';
 import LinkView from '../../components/link/linkView/linkView';
 import { ILinkView } from '../../interfaces/ILinkView';
+import LinkLoading from '../../components/link/linkLoading/linkLoading';
 
 interface Props {
   match: any
@@ -22,14 +23,11 @@ class _LinkViewPage extends Component<Props, State> {
   }
 
   async componentDidMount() {
-    const res = await getLinkForViewPage(this.props.match.params.link_id);
-    const item = await res.json();
-    this.setState({ item });
+    this._getLinkData();
   }
 
   render() {
     const item = this.state.item;
-    console.log(item);
     if (item) {
       return (
         <React.Fragment>
@@ -39,9 +37,22 @@ class _LinkViewPage extends Component<Props, State> {
         </React.Fragment>
       )
     } else {
-      return <div>Loading</div>
+      return (
+        <div className="offset-sm-1 col-sm-10 offset-md-2 col-md-8 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+          <LinkLoading />
+        </div>
+      )
     }
   }
+
+  private async _getLinkData(){
+    const res = await getLinkForViewPage(this.props.match.params.link_id);
+    const item = await res.json();
+    setTimeout(() => {
+      this.setState({ item });
+    }, 200);
+  }
+
 }
 
 export const LinkViewPage = withRouter((props) => <_LinkViewPage {...props} />);

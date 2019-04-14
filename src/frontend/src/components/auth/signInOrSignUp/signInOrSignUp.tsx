@@ -23,6 +23,7 @@ class _SignInOrSingUp extends Component<Props, State> {
 
     this.state = {
       user: {
+        id: -1,
         firstName: '',
         lastName: '',
         username: '',

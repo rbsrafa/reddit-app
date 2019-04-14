@@ -56,7 +56,11 @@ class _Header extends Component<Props, State> {
               </ul>
 
               {this.state.user ? 
-                <UserDropdown username={this.state.user.username} profileImage={this.state.user.profileImage!}/> 
+                <UserDropdown 
+                  username={this.state.user.username} 
+                  profileImage={this.state.user.profileImage!}
+                  userId={this.state.user.id}
+                /> 
                 :
                 <SignButtons />
               }

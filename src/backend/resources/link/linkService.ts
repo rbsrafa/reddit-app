@@ -2,8 +2,6 @@ import { TYPES } from './../../constants/types';
 import { Link } from './Link';
 import { inject } from "inversify";
 import { Repository } from 'typeorm';
-import { Comment } from '../comment/Comment';
-import { User } from '../user/User';
 
 /**
  * LinkService Class
@@ -15,8 +13,7 @@ export class LinkService {
    * @param _linkRepository 
    */
   public constructor(
-    @inject(TYPES.LinkRepository) private _linkRepository: Repository<Link>,
-    @inject(TYPES.UserRepository) private _userRepository: Repository<User>
+    @inject(TYPES.LinkRepository) private _linkRepository: Repository<Link>
   ) { }
 
   /**

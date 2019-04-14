@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import LinkEntry from '../../components/link/linkEntry/linkEntry';
 import { ILinkEntry } from '../../interfaces/ILinkEntry';
 import { getLinks } from '../../services/linkService';
 import ListView from '../../components/link/listView/listView';
+import LinkLoading from '../../components/link/linkLoading/linkLoading';
+import SearchBar from '../../components/searchBar/searchBar';
+import CommunityInfo from '../../components/community/info/communityInfo';
 
-interface Props {
-
-}
+interface Props { }
 
 interface State {
   links: ILinkEntry[] | null;
@@ -22,7 +22,40 @@ export class HomePage extends Component<Props, State> {
   }
 
   async componentDidMount() {
+    this._getLinksData();
+  }
 
+  render() {
+    if (this.state.links) {
+      return (
+        <React.Fragment>
+          <div className="row no-gutters">
+            <div className="offset-sm-1 col-sm-10 offset-md-0 col-md-8 offset-lg-1 col-lg-7 offset-xl-2 col-xl-5">
+              <div >
+                <SearchBar />
+              </div>
+              <div>
+                <ListView items={this.state.links} />
+              </div>
+            </div>
+            <div className="col-md-4 col-lg-3 col-xl-3  d-none d-md-block">
+              <CommunityInfo />
+            </div>
+          </div>
+
+
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <div className="offset-sm-1 col-sm-10 offset-md-0 col-md-8 offset-lg-1 col-lg-7 offset-xl-2 col-xl-5">
+          {this._renderLoading()}
+        </div>
+      );
+    }
+  }
+
+  private async _getLinksData() {
     if (!this.state.links) {
       const res = await getLinks();
       const links = await res.json();
@@ -39,22 +72,15 @@ export class HomePage extends Component<Props, State> {
           score: link.votes.length
         };
       });
-
-      this.setState({ links: mappedLinks });
+      setTimeout(() => {
+        this.setState({ links: mappedLinks });
+      }, 200);
     }
-
   }
 
-  render() {
-    if (this.state.links) {
-      return (
-        <div className="offset-sm-1 col-sm-10 offset-md-2 col-md-8 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-          <ListView items={this.state.links} />
-        </div>
-      );
-    } else {
-      return <div>loading...</div>
-    }
-
+  private _renderLoading() {
+    let progresses = [];
+    for (let i = 0; i < 6; i++) progresses.push(<LinkLoading key={i}/>);
+    return progresses;
   }
 }

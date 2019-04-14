@@ -1,5 +1,6 @@
 import * as React from "react";
 import { fromEvent } from "rxjs";
+import { getAuthUser } from "../../services/authService";
 
 const key = "__token";
 const win = (window as any);
@@ -52,8 +53,11 @@ export function withAuth(cb: (props: AuthProps) => JSX.Element) {
     return () => <WithAuth cb={cb} />;
 }
 
-export const setAuthToken = (token: string | null) => {
+export const setAuthToken = async (token: string | null) => {
     win[key] = token;
+    const res = await getAuthUser(token!);
+    const authUser = await res.json();
+    win.redditAuthUser = authUser;
     const authTokenChangeEvent = new CustomEvent("authTokenChange", { detail: token });
     document.dispatchEvent(authTokenChangeEvent);
 };

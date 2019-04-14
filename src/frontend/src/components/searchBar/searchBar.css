@@ -1,0 +1,13 @@
+#searchButton{
+  border-radius: 2px !important;
+  position: absolute !important;
+  z-index: 10;
+  background: #252425 !important;
+}
+
+#search-input{
+  background: #252425 !important;
+  color: white;
+  border-color: #3748FF;
+  position: relative;
+}

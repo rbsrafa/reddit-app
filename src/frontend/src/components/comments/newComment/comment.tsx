@@ -7,16 +7,21 @@ interface Props {
   userId: number;
 }
 
-export default class Comment extends Component<Props> {
+export default class NewComment extends Component<Props> {
 
   constructor(props: Props) {
     super(props);
   }
 
+  private _renderAuthUser(){
+    if((window as any).redditAuthUser) return (window as any).redditAuthUser.username;
+    else return 'Alien';
+  }
+
   render() {
     return (
       <React.Fragment>
-        <small>Comment as <Link to={`/user/${this.props.userId}`}>{this.props.username}</Link></small>
+        <small>Comment as <Link to={`/user/${this.props.userId}`}>{this._renderAuthUser()}</Link></small>
         <div className="">
           <div className="input-group">
             <textarea id='comment-input' className="form-control-lg" aria-label="With textarea"></textarea>

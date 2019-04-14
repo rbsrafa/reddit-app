@@ -1,7 +1,8 @@
 #score{
   text-align: center !important;
   background: #1B1A1B;
-  padding-top: 15px;
+  padding-top: 12px !important;
+  padding-bottom: 8px !important;
 }
 
 #link-body{

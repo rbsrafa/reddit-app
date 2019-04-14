@@ -4,7 +4,7 @@ import { HomePage } from './home/home';
 import { LinkViewPage } from './link-view/link-view';
 import { LinkEditorPage } from './link-editor/link-editor';
 import { CreateLinkPage } from './link-create/link-create';
-import { UserProfilePage } from './user-profile/user-profile';
+import { UserProfilePage } from './user-profile/userProfile';
 import { SigninPage } from './signin/signin';
 import { SignupPage } from './signup/signup';
 import { Header } from '../components/navbar/header/header';
