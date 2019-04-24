@@ -23,3 +23,11 @@
   color: white;
   text-decoration: none;
 }
+
+.fa-chevron-up:hover{
+  color: blue;
+}
+
+.fa-chevron-down:hover{
+  color: red;
+}

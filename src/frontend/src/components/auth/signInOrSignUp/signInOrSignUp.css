@@ -1,0 +1,10 @@
+.form-control:focus{
+  background: white !important;
+  color: black !important;
+}
+
+.alert-sm{
+  padding: 1px !important;
+  margin: 2px !important;
+  color: rgb(211, 32, 32);
+}

@@ -7,7 +7,7 @@ export class SignupPage extends Component {
       <React.Fragment>
         <div className="container">
           <div className="row">
-            <div className="col-sm-8 offset-sm-2 col-md-4 offset-md-4 ">
+            <div className="col-sm-8 offset-sm-2 col-md-6 offset-md-3 offset-lg-4 col-lg-4 ">
               <h4><i className="fas fa-user-plus mr-2 text-primary"></i>Sign Up</h4>
               <SignInOrSignUp />
             </div>

@@ -10,6 +10,7 @@ interface Props { }
 
 interface State {
   links: ILinkEntry[] | null;
+  query: string;
 }
 
 export class HomePage extends Component<Props, State> {
@@ -17,7 +18,8 @@ export class HomePage extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      links: null
+      links: null,
+      query: ''
     }
   }
 
@@ -27,15 +29,18 @@ export class HomePage extends Component<Props, State> {
 
   render() {
     if (this.state.links) {
+      const filteredLinks = this.state.links.filter(link => {
+        return link.title.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1;
+      });
       return (
         <React.Fragment>
           <div className="row no-gutters">
             <div className="offset-sm-1 col-sm-10 offset-md-0 col-md-8 offset-lg-1 col-lg-7 offset-xl-2 col-xl-5">
               <div >
-                <SearchBar />
+                <SearchBar query={(query: string) => this.setState({query})} />
               </div>
               <div>
-                <ListView items={this.state.links} />
+                <ListView items={filteredLinks} />
               </div>
             </div>
             <div className="col-md-4 col-lg-3 col-xl-3  d-none d-md-block">

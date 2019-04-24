@@ -8,7 +8,7 @@ export function validateUser(user: User){
     username: joi.string().max(30),
     email: joi.string().email(),
     password: joi.string().min(6)
-  }).options({stripUnknown: true});
+  }).options({stripUnknown: true, abortEarly: false});
 
   return joi.validate(user, schema);
 }

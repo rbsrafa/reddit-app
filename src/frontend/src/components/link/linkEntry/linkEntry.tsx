@@ -23,8 +23,8 @@ export default class LinkEntry extends Component<Props> {
           </div>
           <div id='link-body' className="col-11">
             {this._renderPostedBy()}
-            <h5 id='item-title'><Link style={{ color: 'white' }} to={`/link/${props.id}`}>{props.title}</Link></h5>
-            <a href={props.url}><small>{props.url.length > 40 ? `${props.url.slice(0, 40)}...` : props.url}</small></a><br />
+            <h5 id='item-title'><Link style={{ color: 'white', textDecoration: 'none' }} to={`/link/${props.id}`}>{props.title}</Link></h5>
+            <a target='_blank' href={props.url}><small>{props.url.length > 40 ? `${props.url.slice(0, 40)}...` : props.url}</small></a><br />
             {this._renderCommentsCount()}
           </div>
         </div>
@@ -48,7 +48,7 @@ export default class LinkEntry extends Component<Props> {
   private _renderPostedBy() {
     return this.props.item.username !== undefined ?
       (
-        <small>Posted by u/{this.props.item.username} {this.props.item.date}</small>
+        <small>Posted by u/{this.props.item.username} {this.renderTimeSinceDate(this.props.item.date!) + ' ago'}</small>
       )
       :
       <div></div>
@@ -69,5 +69,24 @@ export default class LinkEntry extends Component<Props> {
       :
       <div></div>
   }
+
+  private renderTimeSinceDate(jsonDate: string) {
+    const time = Date.parse(jsonDate);
+    const now = new Date().getTime();
+    const difference = (now - time) / 1000;
+    const seconds = Math.ceil(difference);
+    const minutes = Math.ceil(seconds / 60);
+    const hours = Math.ceil(minutes / 60);
+    const days = Math.ceil(hours / 24);
+    if (seconds < 60) {
+        return `${seconds} seconds`;
+    } else if (minutes < 60) {
+        return `${minutes} minutes`;
+    } else if (hours < 24) {
+        return `${hours} hours`;
+    } else {
+        return `${days} days`;
+    }
+}
 
 }

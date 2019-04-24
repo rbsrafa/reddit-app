@@ -1,6 +1,7 @@
 .dark{
   background: #201F20;
   border-color: rgb(75, 71, 71) !important;
+  color: rgb(222, 211, 211) !important;
 }
 
 .border{
@@ -20,4 +21,16 @@
   border-radius: 0px !important;
   margin: 0px;
   width: 100% !important;
+}
+
+#title{
+  background: #201F20 !important;
+  color:rgb(235, 224, 224) !important;
+  border-color: rgb(75, 71, 71) !important;
+}
+
+#url{
+  background: #201F20 !important;
+  color:rgb(235, 224, 224) !important;
+  border-color: rgb(75, 71, 71) !important;
 }

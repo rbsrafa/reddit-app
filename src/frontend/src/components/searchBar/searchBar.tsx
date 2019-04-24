@@ -1,7 +1,20 @@
 import React, { Component } from 'react'
 import './searchBar.css';
 
-export default class SearchBar extends Component {
+interface Props{
+  query: Function
+}
+
+export default class SearchBar extends Component<Props> {
+
+  constructor(props: Props){
+    super(props);
+  }
+  
+  private _onSearch(query: string){
+    this.props.query(query);
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -11,7 +24,7 @@ export default class SearchBar extends Component {
               <i className="fa fa-search"></i>
             </button>
           </span>
-          <input id='search-input' type="text" className="form-control pl-5" placeholder="Explore" />
+          <input onKeyUp={(e) => this._onSearch(e.currentTarget.value)} id='search-input' type="text" className="form-control pl-5" placeholder="Explore" />
         </div>
       </React.Fragment>
     )

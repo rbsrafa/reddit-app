@@ -31,10 +31,11 @@ export default class CreateLink extends Component {
                   <div className="form-group">
                     <input
                       type="text"
-                      className="form-control dark"
+                      className="form-control"
                       id="title"
                       aria-describedby="title"
                       placeholder="Title"
+                      autoComplete="off"
                     />
                   </div>
                   <div className="form-group">
@@ -42,6 +43,7 @@ export default class CreateLink extends Component {
                       className="form-control dark"
                       id="url"
                       placeholder="Url"
+                      autoComplete="off"
                     ></textarea>
                   </div>
                   <button
