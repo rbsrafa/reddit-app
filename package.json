@@ -7,8 +7,8 @@
     "test": "nyc --clean --all --require ts-node/register --require reflect-metadata/Reflect --extension .ts -- mocha --timeout 5000 **/*.test.ts",
     "coverage": "nyc report --reporter=html --clean --all --require ts-node/register --require reflect-metadata/Reflect --extension .ts -- mocha --timeout 5000 **/*.test.ts",
     "client": "cd ./src/frontend && npm start",
-    "server":"nodemon",
-    "dev":"concurrently --kill-others \"npm run client\"  \"nodemon\"",
+    "server": "nodemon",
+    "dev": "concurrently --kill-others \"npm run client\"  \"nodemon\"",
     "start": "ts-node ./src/backend/index.ts"
   },
   "keywords": [
@@ -40,7 +40,9 @@
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.4.0",
     "supertest": "^3.4.2",
-    "typeorm": "^0.2.9"
+    "ts-node": "^8.1.0",
+    "typeorm": "^0.2.9",
+    "typescript": "^3.4.5"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
@@ -51,8 +53,6 @@
     "@types/mocha": "^5.2.5",
     "@types/morgan": "^1.7.35",
     "concurrently": "^4.1.0",
-    "nodemon": "^1.18.7",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.2.1"
+    "nodemon": "^1.18.7"
   }
 }
