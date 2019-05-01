@@ -38,3 +38,8 @@ export async function getAuthUser(token: string) {
     }
   );
 }
+
+export function logoutUser(){
+  localStorage.removeItem('rbs-reddit-app-logged-user');
+  localStorage.removeItem('rbs-reddit-app-token');
+}

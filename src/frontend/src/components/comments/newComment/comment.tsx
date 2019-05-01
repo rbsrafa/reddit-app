@@ -14,7 +14,7 @@ export default class NewComment extends Component<Props> {
   }
 
   private _renderAuthUser(){
-    if((window as any).redditAuthUser) return (window as any).redditAuthUser.username;
+    if(localStorage.getItem('rbs-reddit-app-logged-user')) return JSON.parse(localStorage.getItem('rbs-reddit-app-logged-user')!).username;
     else return 'Alien';
   }
 

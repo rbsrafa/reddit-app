@@ -64,7 +64,7 @@ class _UserProfilePage extends Component<Props, State> {
                 username={this.state.user.username} 
                 firstName={this.state.user.firstName}
                 lastName={this.state.user.lastName}
-                profileImage={this.state.user.profileImage!.url} 
+                profileImage={this.state.user.profileImage ? this.state.user.profileImage.url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3IVcs5QJhazFnScW3xeWTOCO9MI9xhDYothFRQkZgj9JTS5bjVQ'} 
                 bio={';asldkj asd;lfkja sdlfkj alk;fj al;dfj al;kdjf alk;dfj '}
               />
             </div>

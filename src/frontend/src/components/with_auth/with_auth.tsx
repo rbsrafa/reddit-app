@@ -3,10 +3,10 @@ import { fromEvent } from "rxjs";
 import { getAuthUser } from "../../services/authService";
 
 const key = "__token";
-const win = (window as any);
+//const win = (window as any);
 
 export const getAuthToken = () => {
-    const token: string | null = win[key] ? win[key] : null;
+    const token: string | null = localStorage.getItem('rbs-reddit-app-token') ? localStorage.getItem('rbs-reddit-app-token') : null;
     return token;
 }
 
@@ -54,10 +54,12 @@ export function withAuth(cb: (props: AuthProps) => JSX.Element) {
 }
 
 export const setAuthToken = async (token: string | null) => {
-    win[key] = token;
+    localStorage.setItem('rbs-reddit-app-token', token!);
+    //win[key] = token;
     const res = await getAuthUser(token!);
     const authUser = await res.json();
-    win.redditAuthUser = authUser;
+    localStorage.setItem('rbs-reddit-app-logged-user', JSON.stringify(authUser));
+    //win.redditAuthUser = authUser;
     const authTokenChangeEvent = new CustomEvent("authTokenChange", { detail: token });
     document.dispatchEvent(authTokenChangeEvent);
 };

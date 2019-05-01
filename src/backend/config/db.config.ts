@@ -27,6 +27,9 @@ export async function getDbConnection(){
       ProfileImage,
       CoverImage
     ],
+    extra: {
+      ssl: true
+    },
     synchronize: true
   });
 
