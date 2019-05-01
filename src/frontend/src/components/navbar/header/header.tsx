@@ -33,8 +33,6 @@ class _Header extends Component<Props, State> {
   }
 
   async componentDidUpdate() {
-    console.log('updated');
-    
     if(!this.state.user && this.props.token) {
       const res = await getAuthUser(this.props.token);
       const user = await res.json();

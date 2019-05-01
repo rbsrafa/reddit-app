@@ -39,7 +39,8 @@ export async function createApp(){
   server.setErrorConfig((app) => {
     // Define route not found error
     app.use('*', (req, res, next) => {
-      res.status(404).json({error: 'Route not found'});
+      console.log(`${process.env.SERVER_HOST}?p=${req.url}`);
+      res.redirect(`${process.env.SERVER_HOST}?p=${req.url}`);
     });
   });
 
