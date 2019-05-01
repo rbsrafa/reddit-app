@@ -32,6 +32,8 @@ export async function createApp(){
     app.use(globalMiddlewares); 
     // Apply route for saved images
     app.use('/uploads/images', express.static('uploads/images'));
+    // Add frontend build path
+    app.use(express.static('src/frontend/build'));
   });
   // Set Route Not Found error for unregistered routes
   server.setErrorConfig((app) => {

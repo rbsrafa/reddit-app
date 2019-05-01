@@ -10,6 +10,6 @@ const port = process.env.SERVER_PORT || 3001;
 (async () => {
   const server = await createApp();
   server.listen(port, () => {
-    console.log(`Server is running at http://127.0.0.1:${port}`);
+    console.log(`Server is running on port ${port}`);
   });
 })();
