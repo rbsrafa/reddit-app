@@ -26,7 +26,7 @@ export default class UserDropdown extends Component<Props> {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <img id='profile-image' src={this.props.profileImage.url} alt=""/>
+              <img id='profile-image' src={this.props.profileImage.url ? this.props.profileImage.url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3IVcs5QJhazFnScW3xeWTOCO9MI9xhDYothFRQkZgj9JTS5bjVQ'} alt=""/>
               {this.props.username}
             </button>
             <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
