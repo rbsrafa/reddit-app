@@ -34,13 +34,20 @@ export async function createApp(){
     app.use('/uploads/images', express.static('uploads/images'));
     // Add frontend build path
     app.use(express.static('src/frontend/build'));
+
+    // Define route not found error
+    app.use('*', (req, res, next) => {
+      (req as any).bbb = req.params[0];
+      next();
+    });
+
   });
-  // Set Route Not Found error for unregistered routes
+  //Set Route Not Found error for unregistered routes
   server.setErrorConfig((app) => {
     // Define route not found error
     app.use('*', (req, res, next) => {
-      console.log(`${process.env.SERVER_HOST}?p=${req.url}`);
-      res.redirect(`${process.env.SERVER_HOST}?p=${req.url}`);
+      console.log('path: ',`${process.env.SERVER_HOST}?p=${(req as any).bbb}`);
+      res.redirect(`${process.env.SERVER_HOST}?p=${(req as any).bbb}`);
     });
   });
 
