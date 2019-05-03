@@ -40,13 +40,17 @@ class _LinkViewPage extends Component<Props, State> {
     await this._getLinkData();
   }
 
+  private async _onCommentCreated(){
+    await this._getLinkData();    
+  }
+
   render() {
     const item = this.state.item;
     if (item) {
       return (
         <React.Fragment>
           <div className="offset-sm-1 col-sm-10 offset-md-2 col-md-8 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-            <LinkView item={this.state.item!} onUpdate={(voted:any, id:any) => this._onVoteUpdate(voted, id)}/>
+            <LinkView item={this.state.item!} onUpdate={(voted:any, id:any) => this._onVoteUpdate(voted, id)} onCommentCreated={() => this._onCommentCreated()}/>
           </div>
         </React.Fragment>
       )

@@ -3,10 +3,12 @@ import { ILinkView } from '../../../interfaces/ILinkView';
 import './linkView.css'
 import NewComment from '../../comments/newComment/comment';
 import CommentView from '../../comments/commentView/commentView';
+import { any } from 'joi';
 
 interface Props {
   item: ILinkView;
   onUpdate: Function;
+  onCommentCreated: Function;
 }
 
 export default class LinkView extends Component<Props> {
@@ -33,6 +35,30 @@ export default class LinkView extends Component<Props> {
     });
         
     return (upVotes.length ? upVotes.length:0) - (downVotes.length ? downVotes.length:0);
+  }
+
+  private _onCommentCreated(){
+    console.log('comment created');
+    this.props.onCommentCreated();
+  }
+
+  private _renderComments(){
+    const comments = this.props.item.comments;
+    
+    return comments.map((comment: any, i: any) => {
+      return (
+        <CommentView
+          id={comment.id}
+          content={comment.content}
+          date={comment.createdAt.slice(0,10)}
+          username={comment.user.username}
+          userId={comment.user.userId}
+          onUpvote={() => { }}
+          onDownvote={() => { }}
+          key={i}
+        />
+      )
+    })
   }
 
   render() {
@@ -63,23 +89,10 @@ export default class LinkView extends Component<Props> {
                 username={item.user.username}
                 userId={item.user.id}
                 linkId={item.id}
+                onCommentCreated={() => this._onCommentCreated()}
               ></NewComment>
               <div className='pt-3 pb-2'>Comments:</div>
-              {item.comments.map((comment: any, i: any) => {
-                return (
-                  <CommentView
-                    id={comment.id}
-                    content={comment.content}
-                    date={comment.createdAt.slice(0,10)}
-                    username={comment.user.username}
-                    userId={comment.user.userId}
-                    onUpvote={() => { }}
-                    onDownvote={() => { }}
-                    key={i}
-                  />
-                )
-              })}
-
+              {this._renderComments()}
             </div>
 
           </div>

@@ -8,6 +8,7 @@ interface Props {
   username: string;
   userId: number;
   linkId: number;
+  onCommentCreated: Function;
 }
 
 interface State {
@@ -35,6 +36,7 @@ export default class NewComment extends Component<Props, State> {
     }
     const res = await createComment(comment);
     const json = await res.json();
+    this.props.onCommentCreated();
   }
 
   private _updateContent(content: string){
