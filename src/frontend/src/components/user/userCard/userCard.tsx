@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './userCard.css';
-import CreateLink from '../../link/create/createLink';
+import {CreateLink} from '../../link/create/createLink';
 import { Link } from 'react-router-dom';
 
 interface Props {

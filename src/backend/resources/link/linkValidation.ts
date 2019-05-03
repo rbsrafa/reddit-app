@@ -5,7 +5,7 @@ export function validateLink(link: Link){
   const schema = joi.object({
     url: joi.string().uri(),
     title: joi.string()
-  }).options({stripUnknown: true});
+  }).options({stripUnknown: true, abortEarly: false});
 
   return joi.validate(link, schema);
 }

@@ -1,3 +1,4 @@
+import { getAuthToken } from './../components/with_auth/with_auth';
 
 export async function getLinkById(id: number){
   return await fetch(
@@ -36,7 +37,17 @@ export async function getLinkForViewPage(id: number){
 }
 
 export async function createLink(link: any) {
-
+  return await fetch(
+    '/api/v1/links',
+    {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": getAuthToken()!
+      },
+      body: JSON.stringify(link)
+    }
+  );
 }
 
 export async function updateLink(options: any) {

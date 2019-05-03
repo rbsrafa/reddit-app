@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CreateLink from '../../components/link/create/createLink';
+import { CreateLink } from '../../components/link/create/createLink';
 
 export class CreateLinkPage extends Component {
 
