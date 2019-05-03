@@ -3,7 +3,7 @@ import './header.css';
 import { Link } from 'react-router-dom';
 import UserDropdown from '../../user/user-dropdown/user-dropdown';
 import SignButtons from '../signButtons/signButtons';
-import { withAuth } from '../../with_auth/with_auth';
+import { withAuth, getAuthToken } from '../../with_auth/with_auth';
 import { User } from '../../../interfaces/User';
 import { getAuthUser } from '../../../services/authService';
 
@@ -59,9 +59,13 @@ class _Header extends Component<Props, State> {
                 <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                   <Link className="nav-link" to='/'><i className="fas fa-rocket m-2 text-primary"></i>Home</Link>
                 </li>
-                <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                  <Link className="nav-link" to='/link_editor'><i className="fas fa-pencil-alt m-2 text-primary"></i>Create Link</Link>
-                </li>
+                {getAuthToken() !== null ? 
+                (
+                  <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                    <Link className="nav-link" to='/link_editor'><i className="fas fa-pencil-alt m-2 text-primary"></i>Create Link</Link>
+                  </li>
+                ): <div></div>}
+                
               </ul>
 
               {this.state.user ? 

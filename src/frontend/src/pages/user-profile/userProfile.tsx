@@ -41,6 +41,17 @@ class _UserProfilePage extends Component<Props, State> {
       return (
         <React.Fragment>
           <div className="row no-gutters">
+
+            <div className='offset-sm-1 col-sm-10 offset-md-0 col-md-8 offset-lg-1 col-lg-7 offset-xl-2 col-xl-5 mb-3 d-block d-md-none'>
+              <UserProfile 
+                  username={this.state.user.username} 
+                  firstName={this.state.user.firstName}
+                  lastName={this.state.user.lastName}
+                  profileImage={this.state.user.profileImage ? this.state.user.profileImage.url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3IVcs5QJhazFnScW3xeWTOCO9MI9xhDYothFRQkZgj9JTS5bjVQ'} 
+                  bio={';asldkj asd;lfkja sdlfkj alk;fj al;dfj al;kdjf alk;dfj '}
+                />
+            </div>
+
             <div className='offset-sm-1 col-sm-10 offset-md-0 col-md-8 offset-lg-1 col-lg-7 offset-xl-2 col-xl-5'>
               <div>
                 <h6

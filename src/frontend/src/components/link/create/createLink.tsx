@@ -32,7 +32,6 @@ class _CreateLink extends Component<Props, State> {
   private async _handleCreate(){
     const res = await createLink(this.state.link);
     const json = await res.json();
-    console.log(this.props);
     if(json.error) this.setState({error: json.error});
     else this.props.history.push('/');
   }

@@ -6,12 +6,33 @@ import CommentView from '../../comments/commentView/commentView';
 
 interface Props {
   item: ILinkView;
+  onUpdate: Function;
 }
 
 export default class LinkView extends Component<Props> {
 
   constructor(props: Props) {
     super(props);
+  }
+
+  private _handleUpvode(){
+    this.props.onUpdate(1, this.props.item.id);
+  }
+
+  private _handleDownvote(){
+    this.props.onUpdate(0, this.props.item.id);
+  }
+
+  private _countVotes(){
+    const upVotes = this.props.item.votes.filter((vote:any) => {
+      return vote.flag === true;
+    });
+
+    const downVotes = this.props.item.votes.filter((vote: any) => {
+      return vote.flag === false;
+    });
+        
+    return (upVotes.length ? upVotes.length:0) - (downVotes.length ? downVotes.length:0);
   }
 
   render() {
@@ -21,9 +42,15 @@ export default class LinkView extends Component<Props> {
       <React.Fragment>
         <div id='link-row2' className='row no-gutters'>
           <div id='score' className="col-1">
-            <i className="fas fa-lg fa-chevron-up"></i><br />
-            {item.votes.length}<br />
-            <i className="fas fa-lg fa-chevron-down"></i>
+            <i 
+              onClick={() => this._handleUpvode()}
+              className="fas fa-lg fa-chevron-up"
+            ></i><br />
+            {this._countVotes()}<br />
+            <i 
+              onClick={() => this._handleDownvote()}
+              className="fas fa-lg fa-chevron-down"
+            ></i>
           </div>
           <div id='link-body' className="col-11">
 
@@ -35,6 +62,7 @@ export default class LinkView extends Component<Props> {
               <NewComment
                 username={item.user.username}
                 userId={item.user.id}
+                linkId={item.id}
               ></NewComment>
               <div className='pt-3 pb-2'>Comments:</div>
               {item.comments.map((comment: any, i: any) => {

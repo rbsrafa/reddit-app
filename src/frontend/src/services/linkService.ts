@@ -50,6 +50,32 @@ export async function createLink(link: any) {
   );
 }
 
+export async function upvoteLink(linkId: number){
+  return await fetch(
+    `/api/v1/links/${linkId}/upvote`,
+    {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": getAuthToken()!
+      }
+    }
+  );
+}
+
+export async function downvoteLink(linkId: number){
+  return await fetch(
+    `/api/v1/links/${linkId}/downvote`,
+    {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": getAuthToken()!
+      },
+    }
+  );
+}
+
 export async function updateLink(options: any) {
 
 }

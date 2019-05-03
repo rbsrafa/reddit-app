@@ -47,8 +47,6 @@ export class HomePage extends Component<Props, State> {
               <CommunityInfo />
             </div>
           </div>
-
-
         </React.Fragment>
       );
     } else {
