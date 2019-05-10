@@ -24,12 +24,12 @@ export default class NewComment extends Component<Props, State> {
     }
   }
 
-  private _renderAuthUser(){
-    if(getAuthToken()) return JSON.parse(localStorage.getItem('rbs-reddit-app-logged-user')!).username;
+  private _renderAuthUser() {
+    if (getAuthToken()) return JSON.parse(localStorage.getItem('rbs-reddit-app-logged-user')!).username;
     else return <div></div>;
   }
 
-  private async _handleOnComment(){
+  private async _handleOnComment() {
     const comment = {
       content: this.state.content,
       linkId: this.props.linkId
@@ -39,36 +39,31 @@ export default class NewComment extends Component<Props, State> {
     this.props.onCommentCreated();
   }
 
-  private _updateContent(content: string){
-    this.setState({content});
+  private _updateContent(content: string) {
+    this.setState({ content });
   }
 
   render() {
     return (
       <React.Fragment>
-        {getAuthToken() ? 
-          (
+        {getAuthToken() ?
+          (<div>
             <small>Comment as <Link to={`/user/${this.props.userId}`}>{this._renderAuthUser()}</Link></small>
-          ): <div></div>}
-        <div className="">
-          <div className="input-group">
-            <textarea 
-              onKeyUp={(e) => this._updateContent((e as any).target.value)}
-              id='content' 
-              className="form-control-lg" 
-              aria-label="With textarea"
-            ></textarea>
-          </div>
-          {getAuthToken() ? 
-          (
-            <button 
-              onClick={() => this._handleOnComment()}
-              className='btn btn-sm btn-outline-primary mt-2'
-            >
-            Comment
+            <div className="input-group">
+              <textarea
+                onKeyUp={(e) => this._updateContent((e as any).target.value)}
+                id='content'
+                className="form-control-lg"
+                aria-label="With textarea"
+              ></textarea>
+            </div>
+            <button
+                onClick={() => this._handleOnComment()}
+                className='btn btn-sm btn-outline-primary mt-2'
+              >
+                Comment
             </button>
-          ): <div></div>}
-        </div>
+          </div>) : <div></div>}
       </React.Fragment>
     )
   }

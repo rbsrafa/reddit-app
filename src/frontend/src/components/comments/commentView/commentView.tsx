@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './commentView.css';
+import { getAuthToken } from '../../with_auth/with_auth';
 
 interface Props {
   id: number;
@@ -23,7 +24,7 @@ export default class CommentView extends Component<Props> {
       <React.Fragment>
         <div id='comment-row' className='row no-gutters mt-1 mb-1'>
           <div id='score' className="col-1">
-            {this._renderVote()}
+            {getAuthToken() ? this._renderVote() : <div></div>}
           </div>
           <div id='link-body' className="col-11">
             {this._renderPostedBy()}

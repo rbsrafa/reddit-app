@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './linkEntry.css';
 import { ILinkEntry } from '../../../interfaces/ILinkEntry';
 import { Link } from 'react-router-dom';
+import { getAuthToken } from '../../with_auth/with_auth';
 
 interface Props {
   item: ILinkEntry;
@@ -19,7 +20,7 @@ export default class LinkEntry extends Component<Props> {
       <React.Fragment>
         <div id='link-row' className='row no-gutters'>
           <div id='score' className="col-1">
-            {this._renderScore()}
+            {getAuthToken() ? this._renderScore() : <div></div>}
           </div>
           <div id='link-body' className="col-11">
             {this._renderPostedBy()}

@@ -4,6 +4,7 @@ import './linkView.css'
 import NewComment from '../../comments/newComment/comment';
 import CommentView from '../../comments/commentView/commentView';
 import { any } from 'joi';
+import { getAuthToken } from '../../with_auth/with_auth';
 
 interface Props {
   item: ILinkView;
@@ -68,15 +69,18 @@ export default class LinkView extends Component<Props> {
       <React.Fragment>
         <div id='link-row2' className='row no-gutters'>
           <div id='score' className="col-1">
-            <i 
-              onClick={() => this._handleUpvode()}
-              className="fas fa-lg fa-chevron-up"
-            ></i><br />
-            {this._countVotes()}<br />
-            <i 
-              onClick={() => this._handleDownvote()}
-              className="fas fa-lg fa-chevron-down"
-            ></i>
+            {getAuthToken() ? (<div>
+              <i 
+                onClick={() => this._handleUpvode()}
+                className="fas fa-lg fa-chevron-up"
+              ></i><br />
+              {this._countVotes()}<br />
+              <i 
+                onClick={() => this._handleDownvote()}
+                className="fas fa-lg fa-chevron-down"
+              ></i>
+            </div>) : <div></div>}
+            
           </div>
           <div id='link-body' className="col-11">
 
