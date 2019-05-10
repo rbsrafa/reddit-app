@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ILinkEntry } from '../../interfaces/ILinkEntry';
-import { getLinks } from '../../services/linkService';
+import { getLinks, upvoteLink, downvoteLink } from '../../services/linkService';
 import ListView from '../../components/link/listView/listView';
 import LinkLoading from '../../components/link/linkLoading/linkLoading';
 import SearchBar from '../../components/searchBar/searchBar';
@@ -24,7 +24,13 @@ export class HomePage extends Component<Props, State> {
   }
 
   async componentDidMount() {
-    this._getLinksData();
+    await this._getLinksData();
+  }
+
+  private async _onVoteUpdate(voted: number, id: number){
+    if(voted === 1) await upvoteLink(id);
+    else await downvoteLink(id);
+    await this._getLinksData();
   }
 
   render() {
@@ -40,7 +46,7 @@ export class HomePage extends Component<Props, State> {
                 <SearchBar query={(query: string) => this.setState({query})} />
               </div>
               <div>
-                <ListView items={filteredLinks} />
+                <ListView onUpdate={(voted:any, id:any) => this._onVoteUpdate(voted, id)} items={filteredLinks} />
               </div>
             </div>
             <div className="col-md-4 col-lg-3 col-xl-3  d-none d-md-block">
@@ -59,15 +65,14 @@ export class HomePage extends Component<Props, State> {
   }
 
   private async _getLinksData() {
-    if (!this.state.links) {
       const res = await getLinks();
       const links = await res.json();
-
       const mappedLinks = links.links.map((link: any) => {
         return {
           id: link.id,
           title: link.title,
           url: link.url,
+          votes: link.votes,
           commentCount: link.comments.length,
           date: link.createdAt.slice(0, 10),
           username: link.user.username,
@@ -75,10 +80,8 @@ export class HomePage extends Component<Props, State> {
           score: link.votes.length
         };
       });
-      setTimeout(() => {
-        this.setState({ links: mappedLinks });
-      }, 200);
-    }
+
+      this.setState({ links: mappedLinks });
   }
 
   private _renderLoading() {

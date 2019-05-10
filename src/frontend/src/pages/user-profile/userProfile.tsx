@@ -122,7 +122,7 @@ class _UserProfilePage extends Component<Props, State> {
   private _renderLinks() {
     const visible = this.state.showLinks;
     return visible ?
-      <ListView items={this.state.links!} />
+      <ListView onUpdate={() => {}} items={this.state.links!} />
       :
       <div></div>
   }
@@ -130,7 +130,7 @@ class _UserProfilePage extends Component<Props, State> {
   private _renderComments() {
     const visible = this.state.showComments;
     return visible ?
-      <ListView items={this.state.links!} />
+      <ListView onUpdate={() => {}} items={this.state.links!} />
       :
       <div></div>
   }

@@ -39,7 +39,6 @@ export default class LinkView extends Component<Props> {
   }
 
   private _onCommentCreated(){
-    console.log('comment created');
     this.props.onCommentCreated();
   }
 

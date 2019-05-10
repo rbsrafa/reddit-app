@@ -13,8 +13,7 @@ interface State {
   item: ILinkView | null
   comment: {
     content: string | null
-  },
-  voted: number | null
+  }
 }
 
 class _LinkViewPage extends Component<Props, State> {
@@ -23,7 +22,6 @@ class _LinkViewPage extends Component<Props, State> {
     super(props);
     this.state = {
       item: null,
-      voted: null,
       comment: {
         content: null
       }

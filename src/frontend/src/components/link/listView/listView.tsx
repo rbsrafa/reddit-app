@@ -4,7 +4,8 @@ import { ILinkEntry } from '../../../interfaces/ILinkEntry';
 
 
 interface Props {
-  items: ILinkEntry[]
+  items: ILinkEntry[];
+  onUpdate: Function;
 }
 
 export default class ListView extends Component<Props> {
@@ -25,7 +26,7 @@ export default class ListView extends Component<Props> {
     return this.props.items.map(link => {
       return (
         <div className="p-1" key={link.id}>
-          <LinkEntry item={link} key={link.id} />
+          <LinkEntry onUpdate={(voted: number, id: number) => {this.props.onUpdate(voted, id)}} item={link} key={link.id} />
         </div>
       )
     })

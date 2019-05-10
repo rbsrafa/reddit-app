@@ -6,12 +6,33 @@ import { getAuthToken } from '../../with_auth/with_auth';
 
 interface Props {
   item: ILinkEntry;
+  onUpdate: Function;
 }
 
 export default class LinkEntry extends Component<Props> {
 
   constructor(props: Props) {
     super(props);
+  }
+
+  private _handleUpvode(){
+    this.props.onUpdate(1, this.props.item.id);
+  }
+
+  private _handleDownvote(){
+    this.props.onUpdate(0, this.props.item.id);
+  }
+
+  private _countVotes(){
+    const upVotes = this.props.item.votes.filter((vote:any) => {
+      return vote.flag === true;
+    });
+
+    const downVotes = this.props.item.votes.filter((vote: any) => {
+      return vote.flag === false;
+    });
+        
+    return (upVotes.length ? upVotes.length:0) - (downVotes.length ? downVotes.length:0);
   }
 
   render() {
@@ -37,9 +58,9 @@ export default class LinkEntry extends Component<Props> {
     return this.props.item.score !== undefined ?
       (
         <div>
-          <i className="fas fa-lg fa-chevron-up"></i><br />
-          {this.props.item.score}<br />
-          <i className="fas fa-lg fa-chevron-down"></i>
+          <i onClick={() => {this._handleUpvode()}} className="fas fa-lg fa-chevron-up"></i><br />
+          {this._countVotes()}<br />
+          <i onClick={() => {this._handleDownvote()}} className="fas fa-lg fa-chevron-down"></i>
         </div>
       )
       :

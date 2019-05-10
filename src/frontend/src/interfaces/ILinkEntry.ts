@@ -9,7 +9,9 @@ export interface ILinkEntry {
   username?: string;
   userId?: number;
   score?: number;
+  votes: any;
   onUpvote?: Function;
   onDownvote?: Function;
+  onUpdate: Function;
   user: User;
 }
