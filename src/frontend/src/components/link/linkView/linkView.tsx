@@ -6,6 +6,7 @@ import CommentView from '../../comments/commentView/commentView';
 import { any } from 'joi';
 import { getAuthToken } from '../../with_auth/with_auth';
 import { Link } from 'react-router-dom';
+import { getAuthUser } from '../../../services/authService';
 
 interface Props {
   item: ILinkView;
@@ -13,10 +14,17 @@ interface Props {
   onCommentCreated: Function;
 }
 
-export default class LinkView extends Component<Props> {
+interface State {
+  isAuthor: boolean;
+}
+
+export default class LinkView extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+    this.state = {
+      isAuthor: this.props.item.user.id === (localStorage.getItem('rbs-reddit-app-logged-user') ? (JSON.parse(localStorage.getItem('rbs-reddit-app-logged-user')!).id) : -1)
+    }
   }
 
   private _handleUpvode(){
@@ -41,6 +49,16 @@ export default class LinkView extends Component<Props> {
 
   private _onCommentCreated(){
     this.props.onCommentCreated();
+  }
+
+  private _renderEditButton(itemId: number){
+    if(this.state.isAuthor){
+      return (
+        <button className='btn btn-sm btn-outline-primary float-right'><Link to={`/link_editor/${itemId}`}>Edit</Link></button>
+      )
+    }else{
+      return <div></div>
+    }
   }
 
   private _renderComments(){
@@ -85,7 +103,9 @@ export default class LinkView extends Component<Props> {
           <div id='link-body' className="col-11">
 
             <small>Posted by /u/{item.user.username} {item.createdAt.slice(0, 10)}</small>
-            <button className='btn btn-sm btn-outline-primary float-right'><Link to={`/link_editor/${item.id}`}>Edit</Link></button>
+            
+            {this._renderEditButton(item.id)}
+            
             <h5 id='item-title'>{this.props.item.title}</h5>
             <a href={this.props.item.url}><small>{this.props.item.url.length > 40 ? `${this.props.item.url.slice(0, 40)}...` : this.props.item.url}</small></a><br />
             <small><i className="fas fa-comment-alt"></i><span style={{ marginRight: 5 }}></span>{item.comments.length} comments</small>
