@@ -2,7 +2,7 @@ import { User } from './../interfaces/User';
 
 export async function signUpService(user: User){
   return await fetch(
-    '/api/v1/users/',
+    `/api/v1/users/`,
     {
       method: 'POST',
       headers: {
@@ -15,7 +15,7 @@ export async function signUpService(user: User){
 
 export async function signInService(email: string, password: string){
   return await fetch(
-    '/api/v1/auth/login',
+    `/api/v1/auth/login`,
     {
       method: "POST",
       headers: {
@@ -28,7 +28,7 @@ export async function signInService(email: string, password: string){
 
 export async function getAuthUser(token: string) {
   return await fetch(
-    '/api/v1/auth/user',
+    `/api/v1/auth/user`,
     {
       method: 'GET',
       headers: {

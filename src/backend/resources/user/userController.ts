@@ -16,6 +16,7 @@ import { UserService } from './userService';
 import { AuthService } from './../../auth/authService';
 import { validateUser } from './userValidation';
 import { uploader } from '../../middlewares/fileUploader';
+import { dataUrlConverter } from '../../middlewares/dataUrlConverter';
 
 @controller('/users')
 export class UserController extends BaseHttpController {
@@ -99,6 +100,37 @@ export class UserController extends BaseHttpController {
       return this.json(updatedUser, 201);
       // Handle error  
     } catch (error) {
+      console.log(error);
+      return this.json({ error: error }, 500);
+    }
+  }
+
+  @httpPost('/:id/profileImage', authMiddleware, uploader.single('profileImage'))
+  public async addProfileImage(
+    @requestParam('id') id: number,
+    @requestHeaders() headers: any,
+    @request() req: any
+  ){
+    try{
+      const token = headers['x-auth-token'];
+      let user = await this._userService.getUserById(id);
+      if (!user) return this.json(
+        resourceNotFoundError('User', id), 404
+      );
+
+      const authUser = await this._authService.getAuthUser(token);
+      if (!authUser) return this.json({ error: 'Not allowed' }, 401);
+
+      if (user.id !== authUser.id) return this.json({ error: 'Not allowed' }, 403);
+      
+      if(req.file){        
+        const dataUrl = dataUrlConverter(req.file);
+        const image = new ProfileImage(dataUrl);
+        const profileImage = await this._profileImageService.create(image, user);
+        return this.json(profileImage, 201);
+      }
+
+    }catch(error){
       console.log(error);
       return this.json({ error: error }, 500);
     }

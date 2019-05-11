@@ -25,7 +25,7 @@ export async function createApp(){
     app.use((req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Headers', '*');
-      res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS, REDIRECT')
+      res.header('Access-Control-Allow-Methods', '*')
       next();
     });
     // Apply global middlewares to application
@@ -45,7 +45,7 @@ export async function createApp(){
   //Set Route Not Found error for unregistered routes
   server.setErrorConfig((app) => {
     // Define route not found error
-    app.use('*', (req, res, next) => {
+    app.use('*', (req, res, next) => {      
       console.log('path: ',`${process.env.SERVER_HOST}?p=${(req as any).bbb}`);
       res.redirect(`${process.env.SERVER_HOST}?p=${(req as any).bbb}`);
     });
