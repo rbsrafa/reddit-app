@@ -8,6 +8,8 @@ import UserProfile from '../../components/user/userCard/userCard';
 import { User } from '../../interfaces/User';
 import { getAuthUser } from '../../services/authService';
 import { getAuthToken } from '../../components/with_auth/with_auth';
+import { getUserById } from '../../services/userService';
+import CommentView from '../../components/comments/commentView/commentView';
 
 interface Props {
   match: any
@@ -16,6 +18,7 @@ interface Props {
 interface State {
   links: ILinkEntry[] | null;
   user: User | null;
+  comments: any;
   showLinks: boolean;
   showComments: boolean;
 }
@@ -27,6 +30,7 @@ class _UserProfilePage extends Component<Props, State> {
     this.state = {
       user: null,
       links: null,
+      comments: null,
       showLinks: false,
       showComments: false
     }
@@ -37,25 +41,25 @@ class _UserProfilePage extends Component<Props, State> {
   }
 
   render() {
-    if (this.state.links && this.state.user) {
+    if (this.state.links && this.state.user && this.state.comments) {
       return (
         <React.Fragment>
           <div className="row no-gutters">
 
             <div className='offset-sm-1 col-sm-10 offset-md-0 col-md-8 offset-lg-1 col-lg-7 offset-xl-2 col-xl-5 mb-3 d-block d-md-none'>
-              <UserProfile 
-                  username={this.state.user.username} 
-                  firstName={this.state.user.firstName}
-                  lastName={this.state.user.lastName}
-                  profileImage={this.state.user.profileImage ? this.state.user.profileImage.url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3IVcs5QJhazFnScW3xeWTOCO9MI9xhDYothFRQkZgj9JTS5bjVQ'} 
-                  bio={';asldkj asd;lfkja sdlfkj alk;fj al;dfj al;kdjf alk;dfj '}
-                />
+              <UserProfile
+                username={this.state.user.username}
+                firstName={this.state.user.firstName}
+                lastName={this.state.user.lastName}
+                profileImage={this.state.user.profileImage ? this.state.user.profileImage.url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3IVcs5QJhazFnScW3xeWTOCO9MI9xhDYothFRQkZgj9JTS5bjVQ'}
+                bio={';asldkj asd;lfkja sdlfkj alk;fj al;dfj al;kdjf alk;dfj '}
+              />
             </div>
 
             <div className='offset-sm-1 col-sm-10 offset-md-0 col-md-8 offset-lg-1 col-lg-7 offset-xl-2 col-xl-5'>
               <div>
                 <h6
-                  className='btn btn-outline-primary p-1 w-100 '
+                  className='btn btn-outline-primary p-1 w-100'
                   onClick={() => this.setState({ showLinks: !this.state.showLinks })}
                 >Show my links
                 </h6>
@@ -71,11 +75,11 @@ class _UserProfilePage extends Component<Props, State> {
               </div>
             </div>
             <div className="col-md-4 col-lg-3 col-xl-3 d-none d-md-block">
-              <UserProfile 
-                username={this.state.user.username} 
+              <UserProfile
+                username={this.state.user.username}
                 firstName={this.state.user.firstName}
                 lastName={this.state.user.lastName}
-                profileImage={this.state.user.profileImage ? this.state.user.profileImage.url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3IVcs5QJhazFnScW3xeWTOCO9MI9xhDYothFRQkZgj9JTS5bjVQ'} 
+                profileImage={this.state.user.profileImage ? this.state.user.profileImage.url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3IVcs5QJhazFnScW3xeWTOCO9MI9xhDYothFRQkZgj9JTS5bjVQ'}
                 bio={';asldkj asd;lfkja sdlfkj alk;fj al;dfj al;kdjf alk;dfj '}
               />
             </div>
@@ -92,25 +96,25 @@ class _UserProfilePage extends Component<Props, State> {
   }
 
   private async _getData() {
-    if (!this.state.links) {
-      const linkRes = await getLinks();
-      const links = await linkRes.json();
 
-      const mappedLinks = links.links.map((link: any) => {
-        return {
-          id: link.id,
-          title: link.title,
-          url: link.url
-        };
-      });
+    const userRes = await getAuthUser(getAuthToken()!);
+    const logUser = await userRes.json();
+    const user = await getUserById(logUser.id);
 
-      const userRes = await getAuthUser(getAuthToken()!);
-      const user = await userRes.json();
+    const mappedLinks = user.links.map((link: any) => {
+      return {
+        id: link.id,
+        title: link.title,
+        url: link.url
+      };
+    });
 
-      setTimeout(() => {
-        this.setState({ links: mappedLinks, user });
-      }, 200);
-    }
+    const comments = user.comments;
+
+    setTimeout(() => {
+      this.setState({ links: mappedLinks, user, comments });
+    }, 200);
+
   }
 
   private _renderLoading() {
@@ -122,15 +126,19 @@ class _UserProfilePage extends Component<Props, State> {
   private _renderLinks() {
     const visible = this.state.showLinks;
     return visible ?
-      <ListView onUpdate={() => {}} items={this.state.links!} />
+      <ListView onUpdate={() => { }} items={this.state.links!} />
       :
       <div></div>
   }
 
   private _renderComments() {
+    console.log(this.state.comments);
+
     const visible = this.state.showComments;
     return visible ?
-      <ListView onUpdate={() => {}} items={this.state.links!} />
+      (this.state.comments.map((c: any, i: any) => {
+        return <CommentView key={i} id={c.id} content={c.content} date={c.date} />
+      }))
       :
       <div></div>
   }

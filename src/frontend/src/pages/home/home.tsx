@@ -80,8 +80,10 @@ export class HomePage extends Component<Props, State> {
           score: link.votes.length
         };
       });
-
-      this.setState({ links: mappedLinks });
+      setTimeout(() => {
+        this.setState({ links: mappedLinks });
+      },200);
+      
   }
 
   private _renderLoading() {

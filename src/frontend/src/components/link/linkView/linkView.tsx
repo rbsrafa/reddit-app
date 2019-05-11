@@ -95,7 +95,10 @@ export default class LinkView extends Component<Props> {
                 onCommentCreated={() => this._onCommentCreated()}
               ></NewComment>
               <div className='pt-3 pb-2'>Comments:</div>
-              {this._renderComments()}
+              <div className='col-11'>
+                {this._renderComments()}
+              </div>
+              
             </div>
 
           </div>

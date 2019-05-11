@@ -22,7 +22,7 @@ export default class CommentView extends Component<Props> {
     const data = this.props;
     return (
       <React.Fragment>
-        <div id='comment-row' className='row no-gutters mt-1 mb-1'>
+        <div id='comment-row' className='w-100 row no-gutters mt-1 mb-1'>
           <div id='score' className="col-1">
             {getAuthToken() ? this._renderVote() : <div></div>}
           </div>
