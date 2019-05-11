@@ -22,8 +22,6 @@ class _LinkEditorPage extends Component<Props, State> {
   }
 
   private async _onUpdate(id: number, options: any){
-    console.log('options: ', options);
-    
     const res = await updateLink(id, options);    
     const item = await res.json();
     console.log('link page: ', item);
