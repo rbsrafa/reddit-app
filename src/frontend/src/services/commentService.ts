@@ -4,7 +4,7 @@ export async function createComment(comment: any) {
   console.log(comment);
   
   return await fetch(
-    '/api/v1/comments',
+    `/api/v1/comments`,
     {
       method: 'POST',
       headers: {

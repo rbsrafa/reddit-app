@@ -14,7 +14,7 @@ export async function getLinkById(id: number){
 
 export async function getLinks() {
   return await fetch(
-    '/api/v1/links',
+    `/api/v1/links`,
     {
       method: "GET",
       headers: {
@@ -38,7 +38,7 @@ export async function getLinkForViewPage(id: number){
 
 export async function createLink(link: any) {
   return await fetch(
-    '/api/v1/links',
+    `/api/v1/links`,
     {
       method: 'POST',
       headers: {
@@ -76,8 +76,18 @@ export async function downvoteLink(linkId: number){
   );
 }
 
-export async function updateLink(options: any) {
-
+export async function updateLink(id: number, options: any) {
+  return await fetch(
+    `/api/v1/links/${id}`,
+    {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": getAuthToken()!
+      },
+      body: JSON.stringify({title: options.title, url: options.link})
+    }
+  );
 }
 
 export async function deleteLink(id: any) {
